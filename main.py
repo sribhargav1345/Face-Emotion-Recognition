@@ -5,66 +5,58 @@ from keras.models import model_from_json
 from keras.utils import img_to_array
 from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, WebRtcMode
 import av
-
+import torch
+import torch.nn as nn
+from torchvision import models, transforms
+from PIL import Image
 emotion_name = {0: 'Angry', 1: 'Disgust', 2: 'Fear', 3: 'Happy', 4: 'Sad', 5: 'Surprise', 6: 'Neutral'}
 
-json_file = open('./models/vgg48_json.json', 'r')
-loaded_model_json = json_file.read()
-json_file.close()
+class VGG19(nn.Module):
+    def __init__(self, num_classes):
+        super(VGG19, self).__init__()
+        self.vgg19 = models.vgg19(pretrained=True)
+        self.vgg19.classifier[6] = nn.Linear(4096, num_classes)
 
-classifier = model_from_json(loaded_model_json)
-classifier.load_weights("./models/vgg48_wt.weights.h5")
+    def forward(self, x):
+        return self.vgg19(x)
 
+# Initialize model
+model = VGG19(num_classes=7)
+model.load_state_dict(torch.load("models\\vgg19_emotion_detection.pth", map_location=torch.device('cpu')))
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
-class FaceEmotionDetector(VideoProcessorBase):
-    def __init__(self):
-        super().__init__()
-        self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-        self.default_expression = "Neutral"  # Set default expression
+def callback(frame):
+    img = frame.to_ndarray(format="bgr24")
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    
+    # Detect faces in the grayscale frame
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5)
+    for (x, y, w, h) in faces:
+        cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
 
-    def transform(self, frame: av.VideoFrame) -> av.VideoFrame:
-        img = frame.to_ndarray(format="bgr24")
-        img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        faces = self.face_cascade.detectMultiScale(img_gray, scaleFactor=1.3, minNeighbors=5)
+        face=img[y:y+h, x:x+w]
+        image_pil = Image.fromarray((face * 255).astype(np.uint8))
+        transform = transforms.Compose([
+            transforms.Resize((224, 224)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ])
 
-        print("Came here")
+        # Apply transformations to the image
+        image_tensor = transform(image_pil).unsqueeze(0) 
+        with torch.no_grad():
+            outputs = model(image_tensor)
 
-        if len(faces) == 0:
-            # If no faces detected, display default expression at the middle of the video
-            label_position = (img.shape[1] // 2 - 100, img.shape[0] // 2)
-            cv2.rectangle(img, (label_position[0], label_position[1] - 50), 
-                          (label_position[0] + 200, label_position[1] + 50), 
-                          (0, 255, 0), 2)
-            cv2.putText(img, self.default_expression, label_position, 
-                        cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 3)
-            return cv2.rectangle
-            return av.VideoFrame.from_ndarray(img, format="bgr24")
+        # Get predictions
+        _, predicted = torch.max(outputs, 1)
+        print(emotion_name[predicted.item()])
+        try:
+            cv2.putText(img, emotion_name[predicted.item()], (x,y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=(0,0,255), thickness=2)
+        except Exception as e:
+            print(e)  
+    # img = cv2.cvtColor(cv2.Canny(img, 100, 200), cv2.COLOR_GRAY2BGR)
 
-        print(len(faces))
-        for (x, y, w, h) in faces:
-            cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
-            roi_gray = img_gray[y:y+h, x:x+w]
-            roi_gray = cv2.resize(roi_gray, (48, 48), interpolation=cv2.INTER_AREA)
-
-            if np.sum([roi_gray]) != 0:
-                roi = roi_gray.astype('float') / 255.0
-                roi = img_to_array(roi)
-                roi = np.expand_dims(roi, axis=0)
-
-                prediction = classifier.predict(roi)[0]
-                maxindex = int(np.argmax(prediction))
-                finalout = emotion_name[maxindex]
-                output = str(finalout)
-
-                label_position = (x, y)
-                cv2.putText(img, output, label_position, cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-            return cv2.rectangle
-        
-        print("Number of faces detected:", len(faces)) 
-        return av.VideoFrame.from_ndarray(img, format="bgr24")
-
-
+    return av.VideoFrame.from_ndarray(img, format="bgr24")
 
 def main():
     st.title("Real Time Face Emotion Detection Application")
@@ -85,10 +77,7 @@ def main():
 
         webrtc_streamer(
             key="example",
-            mode=WebRtcMode.SENDRECV,
-            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
-            video_processor_factory=FaceEmotionDetector,
-            async_processing=True,
+            video_frame_callback=callback
         )
 
 if __name__ == "__main__":

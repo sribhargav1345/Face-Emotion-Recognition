@@ -1,3 +1,5 @@
 csd/
 
 models/*.h5
+
+models/*.pth
