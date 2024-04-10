@@ -9,7 +9,8 @@ import torch
 import torch.nn as nn
 from torchvision import models, transforms
 from PIL import Image
-emotion_name = {0: 'Angry', 1: 'Disgust', 2: 'Fear', 3: 'Happy', 4: 'Sad', 5: 'Surprise', 6: 'Neutral'}
+
+emotion_name = {0: 'Happy', 1: 'Disgust', 2: 'Fear', 3: 'Surprise', 4: 'Sad', 5: 'Neutral', 6: 'Angry'}
 
 class VGG19(nn.Module):
     def __init__(self, num_classes):
@@ -22,7 +23,7 @@ class VGG19(nn.Module):
 
 # Initialize model
 model = VGG19(num_classes=7)
-model.load_state_dict(torch.load("models\\vgg19_emotion_detection.pth", map_location=torch.device('cpu')))
+model.load_state_dict(torch.load("models\\vgg19_emotion_detection (1).pth", map_location=torch.device('cpu')))
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 def callback(frame):
