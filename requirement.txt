@@ -1,0 +1,11 @@
+av
+keras
+numpy
+opencv_contrib_python
+opencv_python
+streamlit
+streamlit_webrtc<0.45.0
+tensorflow
+torch
+torch.nn
+PIL
