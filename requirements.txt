@@ -1,11 +1,10 @@
 av
 keras
 numpy
-opencv_contrib_python
-opencv_python
+opencv-contrib-python
+opencv-python
 streamlit
-streamlit_webrtc<0.45.0
+streamlit-webrtc 
 tensorflow
-torch
-torch.nn
+torch  
 PIL
