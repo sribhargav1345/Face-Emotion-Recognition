@@ -8,4 +8,5 @@ streamlit-webrtc
 tensorflow
 torch  
 torchvision
+efficientnet_pytorch
 PILLOW
