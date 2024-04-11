@@ -8,6 +8,6 @@ streamlit-webrtc
 tensorflow
 torch  
 torchvision
-libxml
+libxml2
 efficientnet_pytorch
 PILLOW
