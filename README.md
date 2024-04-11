@@ -30,7 +30,7 @@ A sample image from the testing dataset:
 ### 2. Models Used
 Our project successfully identified emotions on human face, achieving a accuracy
 of approximately 70%. We conducted extensive experiments, exploring various models such as
-Convolutional Neural Networks (CNN)-2 models used,Resnet model,VGG16 model,Densenet model,MobileNet model for emotion recognition.We have successfully implemented an ensemble approach using the three models that yielded the highest accuracy. This ensemble leverages the predictive power of the top-performing models to enhance the overall performance, resulting in a more robust and accurate system
+Convolutional Neural Networks (CNN)-2 models used,Resnet model,VGG16 model,RegNet Model, Efficient-Net model,Densenet model,MobileNet model for emotion recognition.We have successfully implemented an ensemble approach using the three models that yielded the highest accuracy. This ensemble leverages the predictive power of the top-performing models to enhance the overall performance, resulting in a more robust and accurate system
 
 ### 3. How to Run Locally:
 
@@ -46,12 +46,12 @@ to make informed decisions and optimize our models effectively.
 These are some of the observations in Databricks(Ml-flow):
 
 <p>
-  <img src="mlflow_observations/mlflow1.jpeg" style="margin-right: 20px" alt="mlflow observations" width="500" height="300"/>
+  <img src="mlflow_observations/mlflow1.jpeg" style="margin-right: 20px" alt="mlflow observations" width="400" height="280"/>
 
-  <img src="mlflow_observations/mlflow2.jpeg" alt="mlflow observations" width="500" height="300" />
+  <img src="mlflow_observations/mlflow2.jpeg" alt="mlflow observations" width="400" height="280" />
 </p>
 
-<img src="mlflow_observations/mlflow3.jpeg" alt="mlflow observations" width="500" height="300" />
+<img src="mlflow_observations/mlflow3.jpeg" alt="mlflow observations" width="400" height="280" />
 
 ### 5. Real Time Testing and Deployment:
 We ran these models locally using streamlit and achieved good accuracy. Here are some sample images used during testing:
