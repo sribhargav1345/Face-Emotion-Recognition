@@ -14,9 +14,11 @@ We utilized the FER2013 dataset, The training set consists of 28,709 examples an
 
 A sample images from the training and validation dataset:
 
-<img src="trainingdata/sad1.jpg" alt="sad" width="300"/>
+<p>
+  <img src="trainingdata/sad1.jpg" alt="sad" width="300"/>
 
-<img src="trainingdata/neutral.jpg" alt="neutral" width="300"/>
+  <img src="trainingdata/neutral.jpg" alt="neutral" width="300"/>
+</p>
 
 <img src="trainingdata/suprise.jpg" alt="surprise" width="300"/>
 
@@ -43,20 +45,28 @@ to make informed decisions and optimize our models effectively.
 
 These are some of the observations in Databricks(Ml-flow):
 
-<img src="mlflow_observations/mlflow1.jpeg" alt="mlflow observations" width="300"/>
+<p>
+  <img src="mlflow_observations/mlflow1.jpeg" style="margin-right: 20px" alt="mlflow observations" width="300"/>
 
-<img src="mlflow_observations/mlflow2.jpeg" alt="mlflow observations" width="300"/>
+  <img src="mlflow_observations/mlflow2.jpeg" alt="mlflow observations" width="300"/>
+</p>
 
 <img src="mlflow_observations/mlflow3.jpeg" alt="mlflow observations" width="300"/>
 
 ### 5. Real Time Testing and Deployment:
 We ran these models locally using streamlit and achieved good accuracy. Here are some sample images used during testing:
 
-<img src="real_time_testing/testing1.jpeg" alt="testing 1" width="300"/>
+<p float="left">
+  <img src="real_time_testing/testing1.jpeg" style="margin-right: 20px" alt="testing 1" width="400" height="300"/>
 
-<img src="real_time_testing/testing2.jpeg" alt="testing 2" width="300"/>
+  <img src="real_time_testing/testing 4.jpeg" alt="testing 4" width="400" height="300"/>
+</p>
 
-<img src="real_time_testing/testing3.jpeg" alt="testing 3" width="300"/>
+<p float="left">
+  <img src="real_time_testing/testing2.jpeg" style="margin-right: 20px" alt="testing 2" width="400"/>
+
+  <img src="real_time_testing/testing3.jpeg" alt="testing 3" width="400"/>
+</p>
 
 ### 6. Individual Contributions
 - **Chiruvolu Nikhil:** Developed ML models, made our model real-time.
