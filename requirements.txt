@@ -2,11 +2,12 @@ av
 keras
 numpy
 opencv-contrib-python
-opencv-python
+opencv-python-headless
 streamlit
 streamlit-webrtc 
 tensorflow
 torch  
 torchvision
+libxml
 efficientnet_pytorch
 PILLOW
