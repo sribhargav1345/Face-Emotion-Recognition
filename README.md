@@ -46,12 +46,12 @@ to make informed decisions and optimize our models effectively.
 These are some of the observations in Databricks(Ml-flow):
 
 <p>
-  <img src="mlflow_observations/mlflow1.jpeg" style="margin-right: 20px" alt="mlflow observations" width="300"/>
+  <img src="mlflow_observations/mlflow1.jpeg" style="margin-right: 20px" alt="mlflow observations" width="500" height="300"/>
 
-  <img src="mlflow_observations/mlflow2.jpeg" alt="mlflow observations" width="300"/>
+  <img src="mlflow_observations/mlflow2.jpeg" alt="mlflow observations" width="500" height="300" />
 </p>
 
-<img src="mlflow_observations/mlflow3.jpeg" alt="mlflow observations" width="300"/>
+<img src="mlflow_observations/mlflow3.jpeg" alt="mlflow observations" width="500" height="300" />
 
 ### 5. Real Time Testing and Deployment:
 We ran these models locally using streamlit and achieved good accuracy. Here are some sample images used during testing:
