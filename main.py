@@ -9,22 +9,16 @@ import torch
 import torch.nn as nn
 from torchvision import models, transforms
 from PIL import Image
-from efficientnet_pytorch import EfficientNet
 
 emotion_name = {0: 'Happy', 1: 'Disgust', 2: 'Fear', 3: 'Surprise', 4: 'Sad', 5: 'Neutral', 6: 'Angry'}
 
-class EmotionEfficientNet(nn.Module):
-    def __init__(self, num_classes):
-        super(EmotionEfficientNet, self).__init__()
-        self.efficientnet = EfficientNet.from_pretrained('efficientnet-b0')
-        self.efficientnet._fc = nn.Linear(self.efficientnet._fc.in_features, num_classes)
+from torchvision.models import regnet_y_1_6gf
 
-    def forward(self, x):
-        return self.efficientnet(x)
+num_classes = 7
+model = regnet_y_1_6gf(weights='IMAGENET1K_V2')
+model.to(torch.device('cpu'))                       # Keep cuda here, if your computer supports
 
-# Initialize model
-model = EmotionEfficientNet(num_classes=7)
-model.load_state_dict(torch.load("models\\efficientnet_emotion_detection.pth", map_location=torch.device('cpu')))
+model.load_state_dict(torch.load("models\\regnet_y_1.6gf_emotion_detection.pth", map_location=torch.device('cpu')))  # Keep cuda here, if your computer supports
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 def callback(frame):
