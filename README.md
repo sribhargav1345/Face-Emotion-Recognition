@@ -54,7 +54,7 @@ These are some of the observations in Databricks(Ml-flow):
 <img src="mlflow_observations/mlflow3.jpeg" alt="mlflow observations" width="400" height="280" />
 
 ### 5. Real Time Testing and Deployment:
-We ran these models locally using streamlit and achieved good accuracy. Here are some sample images used during testing:
+We ran these models ( We have used Regnet Model because of it's better accuracy and low space to deployment purposes) locally using streamlit and achieved good accuracy. Here are some sample images used during testing:
 
 <p float="left">
   <img src="real_time_testing/testing1.jpeg" style="margin-right: 20px" alt="testing 1" width="400" height="300"/>
