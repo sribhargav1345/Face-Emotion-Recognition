@@ -68,9 +68,3 @@ We ran these models ( We have used Regnet Model because of it's better accuracy 
   <img src="real_time_testing/testing3.jpeg" alt="testing 3" width="400"/>
 </p>
 
-### 6. Individual Contributions
-- **Chiruvolu Nikhil:** Developed ML models, made our model real-time.
-Integrated ML-fLow into the project. Also tried deployment using flask
-- **Bollapragada Sri Bhargav:** Integration with webapp using streamlit and made frontend
-ui .Developed resnet,densenet,regnet model.Tried developing frontend with Tensorflow js.
-
