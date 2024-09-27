@@ -1,12 +1,9 @@
 # Computer System Design Project-Face Emotion Recognition on Edge Devices
 
 ## Overview
-This repository contains the code and documentation for the Face Emotion Recognition on Edge Devices project, developed as part of CS559, Project Phase 1 at IIT Bhilai.
+This repository contains the code and documentation for the Face Emotion Recognition on Edge Devices project.
 The project code can found in the `csd-mlflowpart.ipynb` file and the real time can be found under `main.py` file. Report can be found under `12140460_12140530_Project-Phase2.pdf`.
 
-### Team Members
-- C Nikhil (12140530)
-- B Sri Bhargav Ram (12140460)
 
 ## Project Description
 ### 1. Data Pre-processing
